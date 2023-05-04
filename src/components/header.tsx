@@ -1,21 +1,17 @@
+"use client";
 import React from "react";
-import { Exo } from "next/font/google";
-
-const exu = Exo({ subsets: ["latin"] });
+import { ImageComponent } from "./image";
 
 export function HeaderComponent() {
   return (
-    <div className="px-5 py-5 lg:px-14">
-      <p
-        className={`
-                ${exu.className}
-                text-[2.5rem] md:text-4xl lg:text-7xl
-                font-semibold
-                animate-openItems
-            `}
-      >
-        AR756_
-      </p>
+    <div className="flex items-center justify-start w-full px-3 py-1 md:py-3 lg:px-14">
+      <ImageComponent
+        alt={"logo"}
+        h={"h-[100px] md:h-[150px] "}
+        w={"w-[150px] md:w-[200px]"}
+        src={"/images/logo-vila-preto.png"}
+        containerClassname={"z-20"}
+      />
     </div>
   );
 }

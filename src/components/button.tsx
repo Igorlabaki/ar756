@@ -1,23 +1,25 @@
 import { ButtonHTMLAttributes, ReactNode } from "react";
+import { Kumbh_Sans } from "next/font/google";
 
+const kumbh_sans = Kumbh_Sans({ subsets: ["latin"], weight: "400" });
 interface Props extends ButtonHTMLAttributes<any> {
-    title?: string;
-    className?: string;
-    icon?: ReactNode;
-    titleClassname?: string;
+  title?: string;
+  className?: string;
+  icon?: ReactNode;
+  titleClassname?: string;
 }
 
 export function ButtonComponent({
-    title,
-    className,
-    icon,
-    titleClassname,
-    ...rest
+  title,
+  className,
+  icon,
+  titleClassname,
+  ...rest
 }: Props) {
-    return (
-        <button {...rest} className={`${className}`}>
-            {icon ? icon : null}
-            <p className={titleClassname}>{title}</p>
-        </button>
-    );
+  return (
+    <button {...rest} className={`${className} ${kumbh_sans}`}>
+      {icon ? icon : null}
+      <p className={titleClassname}>{title}</p>
+    </button>
+  );
 }

@@ -17,7 +17,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={"relative"}>
-        <div className="absolute z-50">
+        <div className="absolute z-50 w-full">
           <HeaderComponent />
         </div>
         {children}
