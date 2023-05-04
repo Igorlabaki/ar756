@@ -7,6 +7,16 @@ module.exports = {
   ],
   theme: {
     extend: {
+      colors: {
+        'insta-yellow': '#feda75',
+        'insta-orange': '#fa7e1e',
+        'insta-pink': '#d62976',
+        'insta-purple': '#962fbf',
+        'insta-blue': '#4f5bd5',
+      },
+      backgroundImage: theme => ({
+        'insta-gradient': 'linear-gradient(to right, ' + theme('colors.insta-yellow') + ', ' + theme('colors.insta-orange') + ', ' + theme('colors.insta-pink') + ', ' + theme('colors.insta-purple') + ', ' + theme('colors.insta-blue') + ')',
+      }),
       keyframes: {
         openEffect: {
             '0%': { opacity: 0 },

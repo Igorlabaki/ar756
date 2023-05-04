@@ -3,10 +3,6 @@ import { ImageComponent } from "@/components/image";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { useEffect, useState } from "react";
-import { Exo } from "next/font/google";
-import { TbBrandAirbnb } from "react-icons/tb";
-
-const exu = Exo({ subsets: ["latin"] });
 
 export default function Home() {
   const slides = [
@@ -38,7 +34,6 @@ export default function Home() {
 
   return (
     <main className="flex flex-col items-center justify-between max-h-screen min-h-screen">
-      <div className="absolute z-40 w-full h-screen bg-white" />
       <div className="flex-shrink-0 w-full h-screen">
         <ImageComponent
           alt={slides[curr]?.alt}
@@ -48,24 +43,6 @@ export default function Home() {
           containerClassname={"z-20"}
         />
       </div>
-      <footer className="flex flex-col items-center justify-center w-full h-64 py-10 bg-black md:px-10">
-        <p
-          className={`
-           ${exu.className}
-           text-white
-           font-semibold
-           text-2xl
-           w-full
-        `}
-        >
-          AR756_
-        </p>
-        <div className="flex gap-x-2">
-          <div className="w-8 h-8 bg-white rounded-sm">
-            <TbBrandAirbnb />
-          </div>
-        </div>
-      </footer>
     </main>
   );
 }
