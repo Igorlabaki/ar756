@@ -14,6 +14,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`relative `}>
+        <div id="modal-root" />
         <div className="absolute z-50 w-full">
           <HeaderComponent />
         </div>
