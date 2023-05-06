@@ -16,7 +16,19 @@ module.exports = {
       },
       backgroundImage: theme => ({
         'insta-gradient': 'linear-gradient(to right, ' + theme('colors.insta-yellow') + ', ' + theme('colors.insta-orange') + ', ' + theme('colors.insta-pink') + ', ' + theme('colors.insta-purple') + ', ' + theme('colors.insta-blue') + ')',
+        'gallery': "url('/images/churrasqueira.jpeg')",
+        'facilities': "url('/images/tresguardasol.jpeg')",
+        'ar756':  "url('/images/piscina-cima.jpeg')",
       }),
+      height: {
+        "map-container": "500px",
+      },
+      boxShadow: {
+        map: "0px 2px 4px rgba(0, 0, 0, 0.1)",
+      },
+      borderRadius: {
+        "map-popup": "0.375rem",
+      },
       keyframes: {
         openEffect: {
             '0%': { opacity: 0 },

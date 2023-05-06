@@ -9,3 +9,10 @@ export interface GridPositionToClasses  {
     [key: string]: string;
 }
 
+export interface ComentarioType{
+    username: string,
+    createdAt: string,
+    comentario: string,
+    avatar: string
+}
+

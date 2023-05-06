@@ -6,11 +6,19 @@ import { orderList } from "@/function/orderGridList";
 
 export default function GridComponent() {
   return (
-    <div className="relative w-full grid grid-cols-14 grid-rows-8 flex-1 gap-2 pt-20">
+    <div
+      className={`relative w-full grid grid-cols-14 grid-rows-8 flex-1 gap-2 pt-20`}
+    >
       {orderList(homeGridImages)?.map(
         (gridItem: ImageGridType, index: number) => {
           return (
-            <GridItemComponent gridItem={gridItem} index={index} key={index} />
+            <>
+              <GridItemComponent
+                gridItem={gridItem}
+                index={index}
+                key={index}
+              />
+            </>
           );
         }
       )}

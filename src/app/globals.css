@@ -25,3 +25,14 @@ body {
     )
     rgb(var(--background-start-rgb));
 }
+
+.leaflet-container {
+  height: 750px;
+  width: 100%;
+}
+
+.leaflet-popup {
+  border-radius: 0.375rem;
+  background-color: #fff;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
