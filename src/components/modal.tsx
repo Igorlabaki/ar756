@@ -1,5 +1,6 @@
 import ReactDOM from "react-dom";
 import React, { useEffect } from "react";
+import { motion, useAnimation, AnimatePresence } from "framer-motion";
 export interface PropsNewModal {
   children: any;
   animate?: boolean;

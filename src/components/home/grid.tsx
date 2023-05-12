@@ -4,7 +4,7 @@ import { ImageGridType } from "@/types";
 import GridItemComponent from "./gridItem";
 import { orderList } from "@/function/orderGridList";
 
-export default function GridComponent() {
+export function GridComponent() {
   return (
     <div
       className={`relative w-full grid grid-cols-14 grid-rows-8 flex-1 gap-2 pt-20`}

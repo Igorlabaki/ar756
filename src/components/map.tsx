@@ -1,18 +1,47 @@
-import { MapContainer, TileLayer } from "react-leaflet";
+import {
+  MapContainer,
+  TileLayer,
+  Marker,
+  CircleMarker,
+  Popup,
+} from "react-leaflet";
 import "leaflet/dist/leaflet.css";
+import { Icon, icon } from "leaflet";
+import { ImageComponent } from "./image";
 
 function MapComponent() {
+  const customIcon = new Icon({
+    iconUrl:
+      "https://res.cloudinary.com/dcjkvwbvh/image/upload/v1683551313/cetohj7c81owchu3ill2.svg",
+    iconSize: [100, 100],
+    attribution: "sdsd",
+  });
+
   return (
-    <div className="leaflet-container w-[700px] overflow-x-hidden">
+    <div className="leaflet-container h-[200px] w-full overflow-hidden z-40">
       <MapContainer
         center={[-23.581578, -46.566888]}
         zoom={16}
-        className="h-screen"
+        className="h-[200px]"
       >
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
+        <div className="relative">
+          <Marker
+            position={[-23.581578, -46.566888]}
+            alt="AR756"
+            title="AR756"
+            icon={customIcon}
+          >
+            <Popup>
+              <h1 className="font-semibold text-gray-700">
+                O local exato sera indicado depois da reserva.
+              </h1>
+            </Popup>
+          </Marker>
+        </div>
       </MapContainer>
     </div>
   );

@@ -1,6 +1,6 @@
 import { ButtonHTMLAttributes, ReactNode } from "react";
 import { Kumbh_Sans } from "next/font/google";
-
+import { useAnimation } from "framer-motion";
 const kumbh_sans = Kumbh_Sans({ subsets: ["latin"], weight: "400" });
 interface Props extends ButtonHTMLAttributes<any> {
   title?: string;

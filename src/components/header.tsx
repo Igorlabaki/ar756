@@ -7,8 +7,8 @@ export function HeaderComponent() {
     <div className="flex items-center justify-start w-full px-3 py-1 md:py-3 lg:px-14">
       <ImageComponent
         alt={"logo"}
-        h={"h-[100px] md:h-[150px] "}
-        w={"w-[150px] md:w-[200px]"}
+        h={"h-[100px] md:h-[250px] "}
+        w={"w-[150px] md:w-[300px]"}
         src={"/images/logo-vila-preto.png"}
         containerClassname={"z-20"}
       />

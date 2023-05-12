@@ -49,7 +49,7 @@ export default function GridItemComponent({ gridItem, index }: GridItemPorps) {
   return (
     <>
       <div
-        className={`overflow-hidden rounded-md  hover:scale-[1.02] cursor-pointer hover:z-30 duration-300 ${
+        className={` rounded-sm  hover:scale-[1.02] cursor-pointer hover:z-30 duration-300 ${
           gridPositionToClasses[gridItem.gridPosition]
         }`}
         onClick={() => handleOpenCarroucelModal && handleOpenCarroucelModal()}
@@ -65,7 +65,7 @@ export default function GridItemComponent({ gridItem, index }: GridItemPorps) {
       {carroucelModalIsOpen && (
         <ModalComponent
           onClose={handleCloseCarroucelModal}
-          styleExternal="bg-black/70 overflow-hidden rounded-md"
+          styleExternal="bg-black/70  rounded-sm"
           styleInternal="rounded-md"
         >
           <CarouselComponent index={gridItem?.position} />

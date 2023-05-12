@@ -18,7 +18,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`relative ${raleway.className}`}>
+      <body className={`relative ${raleway.className}  bg-tijolo `}>
         <div id="modal-root" />
         <div className="absolute z-50 w-full">
           <HeaderComponent />

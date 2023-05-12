@@ -8,6 +8,7 @@ import { homeGridImages } from "../constants/homeGridImages";
 import { ImageGridType } from "@/types";
 import { ImageComponent } from "./image";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
+import { AnimatePresence, motion } from "framer-motion";
 
 interface CarroucelPorps {
   index: number;
@@ -15,15 +16,17 @@ interface CarroucelPorps {
 
 export default function CarouselComponent({ index }: CarroucelPorps) {
   const [currentSlide, setCurrentSlide] = useState(index - 1);
-  const [list, setList] = useState(orderList(homeGridImages));
+  const [directtion, setDirecttion] = useState(0);
 
   function handlePrev() {
+    setDirecttion(0);
     setCurrentSlide((prevSlide) =>
       prevSlide === 0 ? homeGridImages.length - 1 : prevSlide - 1
     );
   }
 
   function handleNext() {
+    setDirecttion(1);
     setCurrentSlide((prevSlide) =>
       prevSlide === homeGridImages.length - 1 ? 0 : prevSlide + 1
     );
@@ -47,6 +50,33 @@ export default function CarouselComponent({ index }: CarroucelPorps) {
     };
   }, []);
 
+  const variants = {
+    initial: (directtion: number) => {
+      return {
+        x: directtion > 0 ? `-100%` : "100%",
+      };
+    },
+    exit: (directtion: number) => {
+      return {
+        x: directtion > 0 ? `100%` : "-100%",
+        opacity: 0,
+        transition: {
+          type: "linear",
+          stiffness: 50,
+          damping: 50,
+        },
+      };
+    },
+    animate: {
+      x: 0,
+      transition: {
+        type: "linear",
+        stiffness: 50,
+        damping: 50,
+      },
+    },
+  };
+
   return (
     <div className="flex items-center justify-center gap-x-8">
       <div className="items-center justify-center p-1 text-white bg-black rounded-full z-60">
@@ -56,15 +86,19 @@ export default function CarouselComponent({ index }: CarroucelPorps) {
           className="cursor-pointer"
         />
       </div>
-      <div className="relative  flex h-[500px] w-[800px] overflow-x-auto rounded-md justify-center items-center gap-4">
-        <ImageComponent
-          alt={list[currentSlide]?.alt}
-          h={"h-[500px] "}
-          w={"w-[800px]"}
-          src={list[currentSlide]?.url}
-          imageClassname="rounded-md"
-          containerClassname={"z-20 overflow-hidden rounded-md"}
-        />
+      <div className="h-[600px] w-[900px] overflow-hidden">
+        <AnimatePresence>
+          <motion.img
+            className="h-[600px] w-[900px] overflow-hidden rounded-md"
+            key={homeGridImages[currentSlide]?.url}
+            src={homeGridImages[currentSlide]?.url}
+            variants={variants}
+            initial={"initial"}
+            exit={"exit"}
+            animate={"animate"}
+            custom={directtion}
+          />
+        </AnimatePresence>
       </div>
       <div className="flex items-center justify-center p-1 text-white bg-black rounded-full ">
         <IoIosArrowForward

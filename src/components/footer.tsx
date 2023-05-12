@@ -9,21 +9,34 @@ import {
 import AnchorComponent from "@/components/anchor";
 import { Exo, Kumbh_Sans } from "next/font/google";
 import { ImageComponent } from "./image";
+import MapComponent from "./map";
 
 const exu = Exo({ subsets: ["latin"] });
 
 export default function FooterComponent() {
   return (
-    <footer className="flex flex-col items-center justify-center w-full  py-5 bg-zinc-900 md:items-start md:px-10 gap-y-3">
-      <div className="flex flex-col items-center justify-center w-full text-white md:flex-row md:justify-between ">
-        <ImageComponent
-          alt={"logo-branco"}
-          h={"h-[100px]"}
-          w={"w-[150px]"}
-          src={"/images/logo-vila-branco.png"}
-          containerClassname="z-50"
-        />
-        <div className="flex gap-x-2 ">
+    <footer className="flex flex-col items-center justify-center w-full bg-zinc-900 md:items-start">
+      <MapComponent />
+      <div className="flex flex-col items-center justify-center w-full h-[138px]  text-white  md:flex-row md:justify-between overflow-hidden ">
+        <div className="relative">
+          <ImageComponent
+            alt={"logo-branco"}
+            h={"h-[100px]"}
+            w={"w-[300px]"}
+            src={"/images/LOGO-VILA-BRANCO_SOMBRA.png"}
+            containerClassname="z-50 ml-5"
+          />
+          <div className="absolute -mt-[120px]">
+            <ImageComponent
+              alt={"logo-branco"}
+              h={"h-[138px]"}
+              w={"w-[499px]"}
+              src={"/images/tijolinho-footer.png"}
+              containerClassname="z-20"
+            />
+          </div>
+        </div>
+        <div className="flex mr-5 gap-x-2 ">
           <AnchorComponent
             href="https://api.whatsapp.com/send/?phone=351910452428&text&type=phone_number&app_absent=0"
             icon={

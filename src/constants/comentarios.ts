@@ -14,7 +14,4 @@ export const comentarios = [
    { username: "Brenda" ,
    avatar: "/images/profile/brenda.png",
    createdAt: "Janeiro 2023", comentario: "Espaço incrível e surpreendente! Muito bem cuidado, delicioso para um day use. Atendimento perfeito também, Givago nos ajudou a resolver nossa reserva em questão de minutos e foi agil em atender todas as nossas solicitações. Com certeza recomendo e gostaria de voltar!"},
-   { username: "Igor" ,
-   avatar: "/images/profile/igor.jpeg",
-   createdAt: "Agosto 2023", comentario: "Passamos um dia muito agradável. O local é espaçoso e exatamente como nas fotos. Indico muito. Além disso o anfitrião sempre respondeu com muita solicitude."},    
 ]
