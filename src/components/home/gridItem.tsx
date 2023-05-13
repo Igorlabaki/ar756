@@ -2,10 +2,7 @@ import React, { useState, useEffect } from "react";
 import { GridPositionToClasses, ImageGridType } from "@/types";
 import { ModalComponent } from "../modal";
 import { ImageComponent } from "../image";
-import { gridPositionToClasses } from "@/constants/homeGridImages";
-import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import CarouselComponent from "../carroucel";
-import useModalsContext from "@/hook/useModalsContext";
 
 interface GridItemPorps {
   gridItem: ImageGridType;
