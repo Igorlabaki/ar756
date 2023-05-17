@@ -47,20 +47,23 @@ export default function ReservaFormComponent() {
     texto,
   }: CreateInfoFormData) {
     console.log(uploadedFiles);
-    const formData = new FormData();
-    formData.append("dataInicio", dataInicio);
-    formData.append("email", email);
-    formData.append("horarioFim", horarioFim);
-    formData.append("horarioInicio", horarioInicio);
-    formData.append("nome", nome);
-    formData.append("participantes", participantes);
-    formData.append("texto", texto);
-
-    uploadedFiles.forEach((file, index) => {
-      formData.append(`uploadedFiles[${index}]`, file);
-    });
-
-    console.log(formData.getAll("uploadedFiles"));
+    axios
+      .post("/api/sendMail", {
+        dataInicio,
+        email,
+        horarioFim,
+        horarioInicio,
+        nome,
+        participantes,
+        texto,
+        uploadedFiles,
+      }) // Remove the unnecessary object wrapping
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   }
 
   function handleFileChange(event: React.ChangeEvent<HTMLInputElement>) {
@@ -140,11 +143,11 @@ export default function ReservaFormComponent() {
           {errors.email && errors.email.message}
         </span>
       </div>
-      <div className="flex flex-col items-start justify-start gap-y-3 gap-x-5 text-sm">
-        <div className="flex w-full justify-between">
-          <div className="flex items-center justify-between gap-x-4 w-full">
-            <div className="flex flex-col  items-start justify-center gap-x-4">
-              <div className="flex gap-x-5 justify-center items-center">
+      <div className="flex flex-col items-start justify-start text-sm gap-y-3 gap-x-5">
+        <div className="flex justify-between w-full">
+          <div className="flex items-center justify-between w-full gap-x-4">
+            <div className="flex flex-col items-start justify-center gap-x-4">
+              <div className="flex items-center justify-center gap-x-5">
                 <label htmlFor="dataInicio" className="font-semibold">
                   Numero de participantes:
                 </label>
@@ -161,7 +164,7 @@ export default function ReservaFormComponent() {
               </span>
             </div>
             <div>
-              <div className="flex gap-x-5 justify-center items-center">
+              <div className="flex items-center justify-center gap-x-5">
                 <label htmlFor="dataInicio" className="font-semibold">
                   Data do Evento:
                 </label>
@@ -179,7 +182,7 @@ export default function ReservaFormComponent() {
             </div>
           </div>
         </div>
-        <div className="flex justify-between   w-full ">
+        <div className="flex justify-between w-full ">
           <div>
             <div className="flex items-center justify-center gap-x-2">
               <label htmlFor="horarioInicio" className="font-semibold">

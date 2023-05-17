@@ -38,16 +38,6 @@ export function ModalComponent({
         onClose();
       }
     }
-
-    if (typeof window !== "undefined") {
-      window.addEventListener("keydown", handleKeyDown);
-    }
-
-    return () => {
-      if (typeof window !== "undefined") {
-        window.removeEventListener("keydown", handleKeyDown);
-      }
-    };
   }, []);
 
   return ReactDOM.createPortal(
