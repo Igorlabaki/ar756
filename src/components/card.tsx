@@ -1,7 +1,7 @@
 import React, { useState, ReactNode } from "react";
 import { ButtonComponent } from "./button";
 import { useAnimation, motion } from "framer-motion";
-import { control } from "leaflet";
+import useModalsContext from "@/hook/useModalsContext";
 
 interface CardProps {
   children: ReactNode;
@@ -11,8 +11,9 @@ interface CardProps {
 }
 
 export function CardComponent({ children, className, w, h }: CardProps) {
-  const [animate, setAnimate] = useState(false);
   const controls = useAnimation();
+  const [animate, setAnimate] = useState(false);
+  const { handleOpenReservaModal } = useModalsContext();
 
   const handleClick = () => {
     setAnimate(true);
@@ -24,7 +25,7 @@ export function CardComponent({ children, className, w, h }: CardProps) {
 
   return (
     <div
-      className={`bg-white w-[430px] ${w} ${h}  flex flex-col pt-7 pb-10   justify-start items-center gap-y-10 z-40
+      className={`bg-white w-[430px] ${w} ${h}  flex flex-col pt-7 pb-10   justify-start items-center gap-y-10 z-30
       ${className}
     `}
     >
@@ -47,6 +48,7 @@ export function CardComponent({ children, className, w, h }: CardProps) {
         onClick={(e) => {
           e.preventDefault();
           handleClick();
+          handleOpenReservaModal && handleOpenReservaModal();
         }}
       >
         RESERVAR

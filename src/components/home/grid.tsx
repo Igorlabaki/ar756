@@ -12,13 +12,7 @@ export function GridComponent() {
       {orderList(homeGridImages)?.map(
         (gridItem: ImageGridType, index: number) => {
           return (
-            <>
-              <GridItemComponent
-                gridItem={gridItem}
-                index={index}
-                key={index}
-              />
-            </>
+            <GridItemComponent gridItem={gridItem} index={index} key={index} />
           );
         }
       )}
