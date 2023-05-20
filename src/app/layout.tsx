@@ -5,9 +5,6 @@ import FooterComponent from "@/components/footer";
 import { HeaderComponent } from "@/components/header";
 import { ModalsProvider } from "@/context/ModalsContext";
 
-export const metadata = {
-  title: "AR756_",
-};
 const raleway = Raleway({
   subsets: ["latin"],
   weight: "400",
