@@ -10,6 +10,7 @@ import AnchorComponent from "@/components/anchor";
 import { Exo, Kumbh_Sans } from "next/font/google";
 import { ImageComponent } from "./image";
 import MapComponent from "./map";
+import { FaTiktok } from "react-icons/fa";
 
 const exu = Exo({ subsets: ["latin"] });
 
@@ -48,13 +49,6 @@ export default function FooterComponent() {
             /* bgColor="bg-[#FF5A5F]" */
           />
           <AnchorComponent
-            href="https://www.airbnb.pt/rooms/51128217?_set_bev_on_new_domain=1683219412_N2FjOTg4NjI4MjI5"
-            icon={
-              <TbBrandAirbnb className="text-white cursor-pointer" size={30} />
-            }
-            /* bgColor="bg-[#FF5A5F]" */
-          />
-          <AnchorComponent
             href="https://www.facebook.com/profile.php?id=100085832906065"
             icon={
               <TbBrandFacebook
@@ -62,6 +56,11 @@ export default function FooterComponent() {
                 size={30}
               />
             }
+            /*    bgColor=" bg-[#3b5998]" */
+          />
+          <AnchorComponent
+            href="https://www.tiktok.com/@ar756_"
+            icon={<FaTiktok className="text-white cursor-pointer" size={30} />}
             /*    bgColor=" bg-[#3b5998]" */
           />
           <AnchorComponent

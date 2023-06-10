@@ -49,7 +49,7 @@ export function ModalComponent({
         styleExternal ? styleExternal : "bg-black/40"
       } flex  w-full h-full justify-center items-center fixed top-0 right-0 z-40 `}
     >
-      <div id="internal_modal" className={`${styleInternal} absolute z-[100]`}>
+      <div id="internal_modal" className={`${styleInternal} absolute z-50`}>
         {children}
       </div>
     </div>,

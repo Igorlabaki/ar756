@@ -20,9 +20,10 @@ function MapComponent() {
   return (
     <div className="leaflet-container h-[200px] w-full overflow-hidden z-40">
       <MapContainer
-        center={[-23.581578, -46.566888]}
+        center={[-23.5876692, -46.5592499]}
         zoom={16}
         className="h-[200px]"
+        dragging={false}
       >
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors'
@@ -30,7 +31,7 @@ function MapComponent() {
         />
         <div className="relative">
           <Marker
-            position={[-23.581578, -46.566888]}
+            position={[-23.5876692, -46.5592499]}
             alt="AR756"
             title="AR756"
             icon={customIcon}

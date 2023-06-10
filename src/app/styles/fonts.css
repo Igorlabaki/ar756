@@ -1,0 +1,11 @@
+@font-face {
+    font-family: 'solidStencil2023';
+    src: url('../../../fonts/solidStencil2023.ttf') format('ttf'),
+    /* Adicione mais formatos de fonte, se necessário */
+    /* Certifique-se de que os caminhos dos arquivos de fonte estejam corretos */
+  }
+  
+  /* Defina estilos usando a fonte personalizada */
+  .custom-font {
+    font-family: 'solidStencil2023';
+  }

@@ -7,12 +7,14 @@ module.exports = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        'custom': ['solidStencil2023', 'sans-serif'],
+      },
       colors: {
-        'insta-yellow': '#feda75',
-        'insta-orange': '#fa7e1e',
-        'insta-pink': '#d62976',
-        'insta-purple': '#962fbf',
-        'insta-blue': '#4f5bd5',
+        'gray-dark': '#1E1F22',
+        'gray-reg': '#2B2D31',
+        'gray-ligth': '#313338',
+        'text-gray': 'rgb(156 163 175)',
       },
       backgroundImage: theme => ({
         'insta-gradient': 'linear-gradient(to right, ' + theme('colors.insta-yellow') + ', ' + theme('colors.insta-orange') + ', ' + theme('colors.insta-pink') + ', ' + theme('colors.insta-purple') + ', ' + theme('colors.insta-blue') + ')',
@@ -69,5 +71,7 @@ module.exports = {
     }, 
     },
   },
-  plugins: [],
+  plugins: [
+    require('tailwind-scrollbar'),
+  ],
 }

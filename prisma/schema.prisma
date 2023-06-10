@@ -1,0 +1,75 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["filteredRelationCount"]
+}
+
+datasource db {
+  provider     = "mysql"
+  url          = env("DATABASE_URL")
+  relationMode = "prisma"
+}
+
+model Orcamento {
+  id             String      @id @default(cuid())
+  trafegoCanal   String
+  conheceEspaco  Boolean     @default(false)
+  horarioFim     String
+  dataInicio     String
+  horarioInicio  String
+  seguranca      Boolean
+  limpeza        Boolean
+  recepcionista  Boolean
+  nome           String
+  email          String
+  telefone       String
+  texto          String      @db.LongText
+  convidados     Int
+  valorBase      Float
+  qtdHorasExtras Int
+  valorHoraExtra Float
+  total          Float
+  aprovado       Boolean     @default(false)
+  feedback       String?     @db.LongText
+  created_at     DateTime    @default(now())
+  updatedAt      DateTime    @updatedAt
+  contato        Boolean?
+  Data           DateEvent[]
+
+  @@map("orcamento")
+}
+
+model Image {
+  id         String   @id @default(cuid())
+  imageUrl   String   @db.LongText
+  area       String
+  legenda    String
+  created_at DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+model Text {
+  id         String   @id @default(cuid())
+  area       String
+  titulo     String
+  text       String   @db.LongText
+  created_at DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+model DateEvent {
+  id            String     @id @default(cuid())
+  tipo          String
+  titulo        String
+  data          String
+  horarioInicio String
+  horarioFim    String
+  orcamento     Orcamento? @relation(fields: [orcamentoId], references: [id])
+  created_at    DateTime   @default(now())
+  updatedAt     DateTime   @updatedAt
+  orcamentoId   String?
+
+  @@index([orcamentoId])
+}

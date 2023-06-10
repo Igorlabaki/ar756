@@ -3,7 +3,7 @@ import { ImageComponent } from "../image";
 import { ButtonComponent } from "../button";
 import { slides } from "@/constants/slides";
 import { motion, AnimatePresence } from "framer-motion";
-import useModalsContext from "@/hook/useModalsContext";
+import useModalsContext from "@/hook/useContext/useModalsContext";
 
 export function MainCarroucel() {
   const [curr, setCurr] = useState(0);
@@ -55,7 +55,7 @@ export function MainCarroucel() {
         </AnimatePresence>
       </div>
       <ButtonComponent
-        title="RESERVAR"
+        title="CONSULTAR"
         className={`
         before:
           text-opacity-40

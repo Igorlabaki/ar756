@@ -1,7 +1,7 @@
 import React, { useState, ReactNode } from "react";
 import { ButtonComponent } from "./button";
 import { useAnimation, motion } from "framer-motion";
-import useModalsContext from "@/hook/useModalsContext";
+import useModalsContext from "@/hook/useContext/useModalsContext";
 
 interface CardProps {
   children: ReactNode;
@@ -51,7 +51,7 @@ export function CardComponent({ children, className, w, h }: CardProps) {
           handleOpenReservaModal && handleOpenReservaModal();
         }}
       >
-        RESERVAR
+        CONSULTAR
       </motion.button>
     </div>
   );

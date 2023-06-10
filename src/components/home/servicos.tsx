@@ -5,7 +5,7 @@ import { RiLightbulbLine } from "react-icons/ri";
 import { IoMdMusicalNotes } from "react-icons/io";
 import { CardComponent } from "@/components/card";
 import { ImageComponent } from "@/components/image";
-import useModalsContext from "@/hook/useModalsContext";
+import useModalsContext from "@/hook/useContext/useModalsContext";
 import { SectionComponent } from "@/components/section";
 import { ItemComodidadeComponent } from "@/components/itemComodidade";
 import {

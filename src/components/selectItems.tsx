@@ -1,18 +1,20 @@
 import React from "react";
+import { BsCheckLg } from "react-icons/bs";
 
 interface SelectItemProps {
   type: any;
   setType: any;
   field: any;
-  title: string;
+  title?: string;
   flexRow?: boolean;
   listOptions: string[];
   handleHidden?: boolean;
+  className?: string;
 }
 
 export default function SelectItemsComponent({
   handleHidden,
-  type,
+  className,
   setType,
   listOptions,
   title,
@@ -20,56 +22,32 @@ export default function SelectItemsComponent({
   field,
 }: SelectItemProps) {
   return (
-    <div
-      className={`w-full flex animate-openOpacity ${
-        flexRow
-          ? "flex-row justify-start items-center space-x-4 flex-wrap"
-          : "flex-col justify-center items-start flex-wrap"
-      }   
-        ${handleHidden ? "flex" : "hidden"}
-    `}
-    >
-      <p className="text-desaturatedDarkCyan   text-sm">{title}:</p>
-      <div className="flex gap-4 text-sm text-veryDarkGraishCyan font-light flex-wrap">
-        {listOptions.map((item, i) => {
-          return (
-            <>
+    <div className="flex flex-wrap gap-4 text-sm font-light">
+      {listOptions.map((item: string, i: number) => {
+        return (
+          <>
+            <div
+              className="flex items-center justify-center gap-2 text-white cursor-pointer "
+              key={item}
+              onClick={() => {
+                if (item === field) {
+                  setType("");
+                } else {
+                  setType(item);
+                }
+              }}
+            >
               <div
-                className="flex justify-center items-center gap-2 cursor-pointer "
-                key={i}
+                className="w-4 h-4 border-[1px] border-gray-500 cursor-pointer brightness-75 flex justify-center items-center"
+                tabIndex={0}
               >
-                <div
-                  className={`h-[12px] w-[12px] rounded-full
-                   ${
-                     type == item
-                       ? "border-[1px] border-darkGrayishYan bg-desaturatedDarkCyan"
-                       : "bg-gray-200"
-                   }
-                  `}
-                  tabIndex={0}
-                  onFocus={() => {
-                    setType((prev: any) => ({
-                      ...prev,
-                      [field]: item,
-                    }));
-                  }}
-                  onClick={() => {
-                    if (item === type) {
-                      setType(() => "");
-                    } else {
-                      setType((prev: any) => ({
-                        ...prev,
-                        [field]: item,
-                      }));
-                    }
-                  }}
-                />
-                <p>{item[0].toUpperCase() + item.substr(1)}</p>
+                {field === item && <BsCheckLg />}
               </div>
-            </>
-          );
-        })}
-      </div>
+              <p>{item[0].toUpperCase() + item.substr(1)}</p>
+            </div>
+          </>
+        );
+      })}
     </div>
   );
 }

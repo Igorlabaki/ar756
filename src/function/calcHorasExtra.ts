@@ -1,6 +1,6 @@
-export function calcHorasExtras(duracaoFesta: number, diaria: number){
+export function calcHorasExtras( diaria: number){
     if(diaria){
-        const valorHoraExtra =  diaria / duracaoFesta
+        const valorHoraExtra =  diaria / 8
         return valorHoraExtra
     }
     return 0
