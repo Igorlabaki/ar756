@@ -1,3 +1,4 @@
+"use client";
 import ReactDOM from "react-dom";
 import React, { useEffect } from "react";
 export interface PropsNewModal {
@@ -28,8 +29,9 @@ export function ModalComponent({
       }
     }
   };
+
   const modalRoot =
-    document.getElementById("modal-root") ?? document.createElement("div");
+    document?.getElementById("modal-root") ?? document?.createElement("div");
 
   useEffect(() => {
     function handleKeyDown(event: KeyboardEvent) {

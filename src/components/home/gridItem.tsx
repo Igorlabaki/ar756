@@ -1,3 +1,4 @@
+"use client";
 import React, { useState, useEffect } from "react";
 import { GridPositionToClasses, ImageGridType } from "@/types";
 import { ModalComponent } from "../modal";
@@ -37,9 +38,9 @@ export default function GridItemComponent({ gridItem, index }: GridItemPorps) {
 
   useEffect(() => {
     if (carroucelModalIsOpen) {
-      document.body.classList.add("overflow-hidden");
+      document?.body.classList.add("overflow-hidden");
     } else {
-      document.body.classList.remove("overflow-hidden");
+      document?.body.classList.remove("overflow-hidden");
     }
   }, [carroucelModalIsOpen]);
 

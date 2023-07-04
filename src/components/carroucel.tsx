@@ -1,3 +1,5 @@
+"use client";
+
 import {
   BsFillArrowLeftCircleFill,
   BsFillArrowRightCircleFill,
@@ -43,10 +45,10 @@ export default function CarouselComponent({ index }: CarroucelPorps) {
       }
     }
 
-    document.addEventListener("keydown", handleKeyDown);
+    document?.addEventListener("keydown", handleKeyDown);
 
     return () => {
-      document.removeEventListener("keydown", handleKeyDown);
+      document?.addEventListener("keydown", handleKeyDown);
     };
   }, []);
 

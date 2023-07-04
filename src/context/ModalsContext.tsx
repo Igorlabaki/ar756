@@ -1,3 +1,4 @@
+"use client";
 import React, { createContext, useEffect, useState } from "react";
 import { IMoodalsContextRepository } from "../context/repositories/IModalsContextRepository";
 
@@ -26,9 +27,9 @@ export function ModalsProvider({ children }: any) {
 
   useEffect(() => {
     if (reservaModalIsOpen) {
-      document.body.classList.add("overflow-hidden");
+      document?.body.classList.add("overflow-hidden");
     } else {
-      document.body.classList.remove("overflow-hidden");
+      document?.body.classList.remove("overflow-hidden");
     }
   }, [reservaModalIsOpen]);
   //

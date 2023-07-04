@@ -1,3 +1,4 @@
+"use client";
 import React, { useEffect, useState } from "react";
 import { ModalComponent } from "../../modal";
 import { ComodidadesCardComponent } from "./comodidadesCard";
@@ -37,9 +38,9 @@ export function ExploreComponent() {
 
   useEffect(() => {
     if (galeriaModal || regrasModal) {
-      document.body.classList.add("overflow-hidden");
+      document?.body.classList.add("overflow-hidden");
     } else {
-      document.body.classList.remove("overflow-hidden");
+      document?.body.classList.remove("overflow-hidden");
     }
   }, [galeriaModal, regrasModal]);
 
