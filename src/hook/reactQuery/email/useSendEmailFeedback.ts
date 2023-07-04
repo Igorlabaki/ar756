@@ -1,5 +1,6 @@
 import { api } from "../../../service/axios";
 import {  SendFeddbackEmailReqBody } from "@/types";
+import { Orcamento } from "@prisma/client";
 import { useMutation } from "@tanstack/react-query";
 
 export  function useSendFeedbackEmail(){
@@ -13,7 +14,7 @@ export  function useSendFeedbackEmail(){
             mutationFn: async (bodyReq: SendFeddbackEmailReqBody) => {
                 return   api
                 .post("/api/email/feedback", bodyReq)
-                .then((resp) => resp.data)
+                .then((resp : {data: Orcamento}) => resp.data)
             },
             onSuccess: () => {
                 

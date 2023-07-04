@@ -24,36 +24,46 @@ export const createDateFormSchema = z.object({
     z.object({
       id: z.string().nullable(),
       nome: z.string().nullable(),
-      email: z.string().nullable(),
       texto: z.string().nullable(),
+      email: z.string().nullable(),
+      total: z.number().nullable(),
       limpeza: z.boolean().nullable(),
       telefone: z.string().nullable(),
-      aprovado: z.boolean().nullable(),
+      feedback: z.string().nullable(),
+      contato: z.boolean().nullable(),
+      valorBase: z.number().nullable(),
       convidados: z.number().nullable(),
-      horarioFim: z.string().nullable(),
+      dataFim: z.string().nullable(),
       dataInicio: z.string().nullable(),
       seguranca: z.boolean().nullable(),
       trafegoCanal: z.string().nullable(),
-      horarioInicio: z.string().nullable(),
       conheceEspaco: z.boolean().nullable(),
       recepcionista: z.boolean().nullable(),
-      valorBase: z.number().nullable(),
       qtdHorasExtras: z.number().nullable(),
       valorHoraExtra: z.number().nullable(),
-      total: z.number().nullable(),
-      feedback: z.string().nullable(),
-      contato: z.boolean().nullable(),
+      aprovadoAr756: z.boolean().nullable(),
+      aprovadoCliente: z.boolean().nullable(),
     }),
     z.undefined()
   ])
-}).refine((data) => {
+})
+.refine((data) => {
     if (data.orcamentoCheck && !data.orcamento) {
       return false
     }
-    
     return true;
   },{
     message: "Este campo é obrigatório!",
     path: ["orcamento"]
   }
-)
+)/* .refine((data) => {
+  if (data.tipo && data.orcamento && data.orcamentoCheck && data.orcamento.dataInicio) {
+    if (data.tipo === "Visita" && data.data > data.orcamento.dataInicio) {
+      return false
+    }
+    return true;
+  }},{
+    message: "Data da visita deve ser anterior à data do evento!",
+    path: ["data"]
+  }
+)   */

@@ -8,7 +8,7 @@ export  async function POST(req: NextRequest) {
 
   const {area,imageUrl,legenda} :CreateImageFormData = res
 
-  const newImage = await creatImageFactory().handle({area,imageUrl,legenda})
+  const newImage = await creatImageFactory().handle({area,legenda,imageUrl})
   
   return NextResponse.json(newImage ); 
 

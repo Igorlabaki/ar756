@@ -3,7 +3,7 @@ import { Image } from "@prisma/client";
 export interface IImageParams{
   area: string
   legenda: string;
-  imageUrl: string;
+  imageUrl: any;
 }
 
 export interface IUpdateImageParams{

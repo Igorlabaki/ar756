@@ -1,9 +1,9 @@
 
 import { useState } from "react";
+import queryClient from "@/service/query";
 import { api } from "../../../service/axios";
 import { useMutation } from "@tanstack/react-query";
 import { IDateEventParams } from "@/backend/repository/IDateEventRepository";
-import { AxiosError } from "axios";
 
 export function useCreateDate() {
   const [errorMessage, setErrorMessage] = useState("");
@@ -22,8 +22,8 @@ export function useCreateDate() {
         .post("/api/date/create", bodyReq)
         .then((resp) => resp.data);
     },
-    onError: (error) => {
-      
+    onSuccess: () => {
+      queryClient.invalidateQueries(["dateList"])
     }
   });
 

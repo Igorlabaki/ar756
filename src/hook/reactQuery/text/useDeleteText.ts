@@ -14,7 +14,7 @@ export function useDeleteText() {
     isSuccess: isDeleteTextSuccess,
     mutate: deleteTextMutate
   } = useMutation({
-    mutationFn: async (textId: string) => {
+    mutationFn: async (textId: string | undefined) => {
       return api
         .delete(`/api/text/delete?textId=${textId}`)
         .then((resp) => resp.data);

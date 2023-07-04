@@ -16,7 +16,7 @@ export function WarningComponent({
 }: WarningProps) {
   const [closeWarning, setCloseWarning] = useState<boolean>(true);
   useEffect(() => {
-    setTimeout(() => setCloseWarning(false), 2000);
+    setTimeout(() => setCloseWarning(false), 4000);
   }, []);
 
   return (

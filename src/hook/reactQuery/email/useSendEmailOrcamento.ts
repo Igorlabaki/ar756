@@ -1,8 +1,7 @@
+import queryClient from "@/service/query";
 import { api } from "../../../service/axios";
 import { useMutation } from "@tanstack/react-query";
-
-import queryClient from "@/service/query";
-import { CreateInfoFormData } from "@/zod/types/reservaFormZodType";
+import { IOrcamentoParams } from "@/backend/repository/IOrcamentoRepository";
 
 export default function useSendEmailOrcamento(){
     const {
@@ -12,13 +11,13 @@ export default function useSendEmailOrcamento(){
             isSuccess: isSendMailSuccess,
             mutate: sendMailMutate
         } = useMutation({
-            mutationFn: async (bodyReq: CreateInfoFormData) => {
+            mutationFn: async (bodyReq: IOrcamentoParams) => {
                 return   api
                 .post("/api/email/orcamento", bodyReq)
-                .then((resp) => resp.data)
+                .then((resp)   => resp.data)
             },
             onSuccess: () => {
-                
+                queryClient.invalidateQueries(["orcamentoList"])
             }
         }
     )

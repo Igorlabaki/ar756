@@ -13,30 +13,30 @@ datasource db {
 }
 
 model Orcamento {
-  id             String      @id @default(cuid())
-  trafegoCanal   String
-  conheceEspaco  Boolean     @default(false)
-  horarioFim     String
-  dataInicio     String
-  horarioInicio  String
-  seguranca      Boolean
-  limpeza        Boolean
-  recepcionista  Boolean
-  nome           String
-  email          String
-  telefone       String
-  texto          String      @db.LongText
-  convidados     Int
-  valorBase      Float
-  qtdHorasExtras Int
-  valorHoraExtra Float
-  total          Float
-  aprovado       Boolean     @default(false)
-  feedback       String?     @db.LongText
-  created_at     DateTime    @default(now())
-  updatedAt      DateTime    @updatedAt
-  contato        Boolean?
-  Data           DateEvent[]
+  id              String      @id @default(cuid())
+  trafegoCanal    String
+  conheceEspaco   Boolean     @default(false)
+  dataInicio      DateTime
+  dataFim         DateTime
+  seguranca       Boolean
+  limpeza         Boolean
+  recepcionista   Boolean
+  nome            String
+  email           String
+  telefone        String
+  texto           String      @db.LongText
+  convidados      Int
+  valorBase       Float
+  qtdHorasExtras  Int
+  valorHoraExtra  Float
+  total           Float
+  aprovadoCliente Boolean     @default(false)
+  aprovadoAr756   Boolean     @default(false)
+  feedback        String?     @db.LongText
+  created_at      DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
+  contato         Boolean?
+  Data            DateEvent[]
 
   @@map("orcamento")
 }
@@ -60,16 +60,15 @@ model Text {
 }
 
 model DateEvent {
-  id            String     @id @default(cuid())
-  tipo          String
-  titulo        String
-  data          String
-  horarioInicio String
-  horarioFim    String
-  orcamento     Orcamento? @relation(fields: [orcamentoId], references: [id])
-  created_at    DateTime   @default(now())
-  updatedAt     DateTime   @updatedAt
-  orcamentoId   String?
+  id          String     @id @default(cuid())
+  tipo        String
+  titulo      String
+  dataInicio  DateTime
+  dataFim     DateTime
+  orcamento   Orcamento? @relation(fields: [orcamentoId], references: [id], onDelete: Cascade)
+  created_at  DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+  orcamentoId String?
 
   @@index([orcamentoId])
 }

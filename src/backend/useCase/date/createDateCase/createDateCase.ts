@@ -1,23 +1,20 @@
 import { IDateEventParams, IDateEventRepository } from "@/backend/repository/IDateEventRepository"
-import { formatarData } from "@/function/formatarData";
-
+import moment from "moment";
 class CreateDateCase {
     constructor(
         private dateRepository: IDateEventRepository,
     ){}
- 
     async execute( data : IDateEventParams ){
-        const isAvailable = await this.dateRepository.checkAvailability({
-            data: data.data,
-            horarioFim:data.horarioFim,
-            horarioInicio: data.horarioInicio
+        const isNotAvailable = await this.dateRepository.checkAvailability({
+            dataFim: data.dataFim,
+            dataInicio: data.dataInicio
         });
         
-            if (isAvailable) {
-                const error =  new Error();
-                error.message = "Data nao disponivel."
-                throw error
-            }
+        if (isNotAvailable) {
+            const error =  new Error();
+            error.message = "Data nao disponivel."
+            throw error
+        }
 
         const checkEventDate = await this.dateRepository.checkIfHasEventDate({
             ...data
@@ -27,18 +24,21 @@ class CreateDateCase {
             ...data
         });
 
-        if (checkEventDate && data.tipo.includes("Evento")) {
+        if (checkEventDate && data?.tipo.includes("Evento")) {
             const error =  new Error();
-            error.message = `Este orcamento ja tem data de evento agendada para ${formatarData(checkEventDate.data)}.`
+            error.message = `Este orcamento ja tem data de evento agendada para ${moment(data?.dataInicio).format(
+                "DD/MM/YYYY"
+            )}. `
             throw error
         }
 
-        if (checkVisitDate  && data.tipo.includes("Visita")) {
+        if (checkVisitDate  && data?.tipo.includes("Visita")) {
             const error =  new Error();
-            error.message = `Este orcamento ja tem data de visita agendada para ${formatarData(checkVisitDate.data)}.`
+            error.message = `Este orcamento ja tem data de visita agendada para ${moment(data?.dataInicio).format(
+                "DD/MM/YYYY"
+            )}.`
             throw error
         }
-
 
         const newDate = await this.dateRepository.create(data)
 

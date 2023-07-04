@@ -43,14 +43,14 @@ export default function InputComponent<T extends FieldValues>({
         {...rest}
         placeholder={capitalize(title)}
         {...register(`${entity}` as Path<T>, {
-          onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
+          onChange: async (e: React.ChangeEvent<HTMLInputElement>) => {
             if (setValue) {
               setValue(
                 `${entity}` as Path<T>,
                 e.target.value as PathValue<T, Path<T>>
               );
             }
-            trigger(`${entity}` as Path<T>);
+            await trigger(`${entity}` as Path<T>);
           },
         })}
         className={`

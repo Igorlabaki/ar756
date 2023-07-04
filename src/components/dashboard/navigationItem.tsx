@@ -1,7 +1,5 @@
 import React, { ReactNode } from "react";
 import { ButtonComponent } from "../button";
-import { AiFillHome } from "react-icons/ai";
-
 interface NavigationItemProps {
   icon?: ReactNode;
   title: "HOME" | "IMAGES" | "TEXTS" | "VALUES";

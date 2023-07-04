@@ -25,7 +25,7 @@ export default function Home() {
       <ExploreComponent />
       {reservaModalIsOpen && (
         <ModalComponent onClose={handleCloseReservaModal}>
-          <ReservaFormComponent />
+          <ReservaFormComponent cliente />
         </ModalComponent>
       )}
     </main>

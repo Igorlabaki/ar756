@@ -1,21 +1,19 @@
 "use client";
 
-import CalendarSectionComponent from "@/components/dashboard/calendarSection";
-import ImagesDashboardComponent from "@/components/dashboard/imagesSection/imagesDashboard";
-import NavigationItemComponent from "@/components/dashboard/navigationItem";
-import OrcamentoSectionComponent from "@/components/dashboard/orcamentoSection";
-import TextDashboardComponent from "@/components/dashboard/textSection";
-
-import { ImageComponent } from "@/components/image";
+import { BiText } from "react-icons/bi";
 import React, { ReactNode, useState } from "react";
+import { ImageComponent } from "@/components/image";
+import TextDashboardComponent from "@/components/dashboard/textSection";
+import NavigationItemComponent from "@/components/dashboard/navigationItem";
+import CalendarSectionComponent from "@/components/dashboard/calendarSection";
+import OrcamentoSectionComponent from "@/components/dashboard/orcamentoSection";
+import ImagesDashboardComponent from "@/components/dashboard/imagesSection/imagesDashboard";
 import {
   AiFillCamera,
   AiFillHome,
   AiOutlineCalendar,
   AiOutlineFileText,
 } from "react-icons/ai";
-import { BiText } from "react-icons/bi";
-import { MdOutlineAttachMoney } from "react-icons/md";
 
 export default function DashBoardPage() {
   const [menuOption, setMenuOption] = useState<

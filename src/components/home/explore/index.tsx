@@ -1,33 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { ImageComponent } from "../../image";
-import { comentarios } from "@/constants/comentarios";
-import { ComentarioType } from "@/types";
-import { motion, useAnimation, AnimatePresence } from "framer-motion";
-import {
-  IoIosArrowBack,
-  IoIosArrowForward,
-  IoMdMusicalNotes,
-} from "react-icons/io";
-import { GrFormClose } from "react-icons/gr";
-import { homeGridImages } from "@/constants/homeGridImages";
 import { ModalComponent } from "../../modal";
-import { fotos } from "@/constants/fotos";
-import { ItemComodidadeComponent } from "../../itemComodidade";
-import { FaSwimmingPool, FaWifi } from "react-icons/fa";
-import {
-  MdOutlineCleaningServices,
-  MdOutlineLunchDining,
-  MdSoupKitchen,
-} from "react-icons/md";
-import {
-  GiBarbecue,
-  GiCctvCamera,
-  GiDress,
-  GiPartyPopper,
-} from "react-icons/gi";
-import { BiBeer, BiDumbbell } from "react-icons/bi";
-import { BsCarFrontFill, BsFlower1, BsSpeaker } from "react-icons/bs";
-import { RiLightbulbLine } from "react-icons/ri";
 import { ComodidadesCardComponent } from "./comodidadesCard";
 import { RegrasCardComponent } from "./regrasCard";
 import { GaleriaCardComponent } from "./galeriaCard";

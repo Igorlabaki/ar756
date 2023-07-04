@@ -53,7 +53,7 @@ export function SelectBooleansItemsCompoenent<T extends FieldValues>({
             <>
               <div
                 className="flex items-center justify-center gap-2 cursor-pointer "
-                key={i}
+                key={i + 1}
                 onClick={() => {
                   if (item === "Sim") {
                     setValue(

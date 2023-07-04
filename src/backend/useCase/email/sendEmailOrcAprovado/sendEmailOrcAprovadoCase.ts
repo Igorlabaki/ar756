@@ -67,7 +67,7 @@ class SendEmailOrcAprovadoCase {
                     </tr>
                     <tr>
                         <th style="padding: 8px; text-align: left; border-bottom: 1px solid #dddddd; font-weight: bold;">Horário de Início</th>
-                        <td style="padding: 8px; text-align: left; border-bottom: 1px solid #dddddd;">${orcamento?.horarioInicio}</td>
+                        <td style="padding: 8px; text-align: left; border-bottom: 1px solid #dddddd;">${orcamento?.dataInicio}</td>
                     </tr>
                     <tr>
                         <th style="padding: 8px; text-align: left; border-bottom: 1px solid #dddddd; font-weight: bold;">Convidados</th>
@@ -75,7 +75,7 @@ class SendEmailOrcAprovadoCase {
                     </tr>
                     <tr>
                         <th style="padding: 8px; text-align: left; border-bottom: 1px solid #dddddd; font-weight: bold;">Horário de Fim</th>
-                        <td style="padding: 8px; text-align: left; border-bottom: 1px solid #dddddd;">${orcamento?.horarioFim}</td>
+                        <td style="padding: 8px; text-align: left; border-bottom: 1px solid #dddddd;">${orcamento?.dataFim}</td>
                     </tr>
                     <tr>
                         <th style="padding: 8px; text-align: left; border-bottom: 1px solid #dddddd; font-weight: bold;">Segurança</th>
@@ -100,7 +100,7 @@ class SendEmailOrcAprovadoCase {
                 <table style="border-collapse: collapse; width: 100%;">
                     <tr>
                         <th style="padding: 8px; text-align: left; border-bottom: 1px solid #dddddd; font-weight: bold;">Aprovado</th>
-                        <td style="padding: 8px; text-align: left; border-bottom: 1px solid #dddddd;font-weight: bold;color: ${orcamento?.aprovado ? "green" : "red"}">${orcamento?.aprovado ? 'Sim' : 'Não'}</td>
+                        <td style="padding: 8px; text-align: left; border-bottom: 1px solid #dddddd;font-weight: bold;color: ${orcamento?.aprovadoCliente ? "green" : "red"}">${orcamento?.aprovadoCliente ? 'Sim' : 'Não'}</td>
                     </tr>
                     <tr>
                         <th style="padding: 8px; text-align: left; border-bottom: 1px solid #dddddd; font-weight: bold;">Valor Base</th>

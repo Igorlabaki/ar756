@@ -11,6 +11,7 @@ import { BiMailSend, BiTrash } from "react-icons/bi";
 import { useAnimation, motion } from "framer-motion";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ButtonComponent } from "@/components/button";
+import { transformDate } from "@/function/transformData";
 import { HiArrowLeft, HiArrowRight } from "react-icons/hi";
 import { MdOutlineAddPhotoAlternate } from "react-icons/md";
 import { convertFileToBase64 } from "@/function/covertBase64";
@@ -20,13 +21,19 @@ import { creatOrcamentoFormSchema } from "@/zod/schemas/orcamentoFormZodSchema";
 import { SelectBooleansItemsCompoenent } from "@/components/selectBooleansItems";
 import { CreateAprovaOrcamentoFormData } from "@/zod/types/orcamentoFormZodType";
 import { useSendFeedbackEmail } from "@/hook/reactQuery/email/useSendEmailFeedback";
+import { useGetOrcamentoById } from "@/hook/reactQuery/orcamento/useGetOrcamentoById";
+import { useSendEmailOrcamentoAprovadoCliente } from "@/hook/reactQuery/email/useSendEmailOrcamentoAprovadoCliente";
 import {
   limpezaValues,
   recepcionistaValue,
   segurancaValue,
 } from "@/constants/calc";
-import { useGetOrcamentoById } from "@/hook/reactQuery/orcamento/useGetOrcamentoById";
-import { useSendEmailOrcamentoAprovadoCliente } from "@/hook/reactQuery/email/useSendEmailOrcamentoAprovadoCliente";
+import {
+  opacityHidde,
+  opacityShow,
+  shakeAnimation,
+} from "@/constants/animations";
+import moment from "moment";
 
 interface OrcamentoByiDPageProps {
   params: {
@@ -35,8 +42,10 @@ interface OrcamentoByiDPageProps {
 }
 
 export default function OrcamentoPage({ params }: OrcamentoByiDPageProps) {
-  const { orcamentoByidMutate, orcamentoByid } = useGetOrcamentoById();
+  const [duracaoFesta, setduracaoFesta] = useState<number>(0);
   const [uploadedFiles, setUploadedFiles] = useState<File[]>([]);
+  const { orcamentoByidMutate, orcamentoByid } = useGetOrcamentoById();
+
   const {
     sendEmailOrcAprovadoMutate,
     IsSendEmailOrcamentoAprovadoClienteLoading,
@@ -48,20 +57,6 @@ export default function OrcamentoPage({ params }: OrcamentoByiDPageProps) {
     IsSendFeedbackEmailLoading,
     isSendFeedbackEmailSuccess,
   } = useSendFeedbackEmail();
-
-  const data1 = new Date(
-    `${orcamentoByid?.dataInicio}T${orcamentoByid?.horarioInicio}`
-  );
-
-  const data2 = new Date(
-    `${orcamentoByid?.dataInicio}T${orcamentoByid?.horarioFim}`
-  );
-
-  const duracaoFesta = calcDuracaoFesta(data1, data2);
-
-  useEffect(() => {
-    orcamentoByidMutate(params.id);
-  }, [orcamentoByidMutate, params.id]);
 
   const [formMode, setformMode] = useState<
     "DESCRITIVO" | "DOCUMENTO" | "SUCCESS" | "FEEDBACK"
@@ -75,19 +70,6 @@ export default function OrcamentoPage({ params }: OrcamentoByiDPageProps) {
   const controlsFeedback = useAnimation();
   const controlsDescritivo = useAnimation();
   const controlsDocuemntos = useAnimation();
-
-  const shakeAnimation = {
-    x: [-10, 10, -10, 10, 0],
-    transition: { duration: 0.3 },
-  };
-
-  const opacityHidde = {
-    opacity: [1, 0],
-  };
-
-  const opacityShow = {
-    opacity: [0, 1],
-  };
 
   const {
     watch,
@@ -129,14 +111,14 @@ export default function OrcamentoPage({ params }: OrcamentoByiDPageProps) {
   }
 
   async function handleOnSubmit(data: CreateAprovaOrcamentoFormData) {
-    if (data.aprovado) {
+    if (data.aprovadoCliente) {
       sendEmailOrcAprovadoMutate(data);
     } else {
       sendFeedbackEmailMutate(data);
     }
   }
 
-  const aprovadoWatch = watch("aprovado");
+  const aprovadoWatch = watch("aprovadoCliente");
 
   useEffect(() => {
     setValue("orcamentoId", params.id);
@@ -164,6 +146,18 @@ export default function OrcamentoPage({ params }: OrcamentoByiDPageProps) {
     controlsDocuemntos,
     controlsSuccess,
   ]);
+
+  useEffect(() => {
+    orcamentoByidMutate(params.id);
+  }, []);
+
+  useEffect(() => {
+    if (orcamentoByid) {
+      const date1 = moment(orcamentoByid?.dataInicio);
+      const date2 = moment(orcamentoByid.dataFim);
+      setduracaoFesta(() => date2.diff(date1, "hours"));
+    }
+  }, [orcamentoByid]);
 
   return (
     <div className={`flex items-center justify-center w-full min-h-screen `}>
@@ -203,11 +197,17 @@ export default function OrcamentoPage({ params }: OrcamentoByiDPageProps) {
               </div>
               <div className="flex items-center justify-center gap-x-2">
                 <AiOutlineClockCircle size={20} />
-                <p className="text-sm">({duracaoFesta}hrs)</p>
+                <p className="text-sm">{`${moment(
+                  orcamentoByid?.dataInicio
+                ).format("HH:mm")} - ${moment(orcamentoByid?.dataFim).format(
+                  "HH:mm"
+                )} (${duracaoFesta}hrs)`}</p>
               </div>
               <div className="flex items-center justify-center gap-x-2">
                 <AiOutlineCalendar size={20} />
-                <p className="text-sm">({orcamentoByid?.dataInicio})</p>
+                <p className="text-sm">
+                  ({moment(orcamentoByid?.dataInicio).format("DD/MM/YYYY")})
+                </p>
               </div>
             </div>
             <div className="flex flex-col flex-1 mt-10 gap-y-2">
@@ -291,7 +291,7 @@ export default function OrcamentoPage({ params }: OrcamentoByiDPageProps) {
               {" "}
               <span className="text-[15px]">*</span> Valor sujeito a alterecao
             </p>
-            {orcamentoByid?.aprovado ? (
+            {orcamentoByid?.aprovadoCliente ? (
               <div className="text-sm">
                 <p className="py-10">
                   Maravilha! Estamos analisando o seu interesse, entraremos em
@@ -303,18 +303,18 @@ export default function OrcamentoPage({ params }: OrcamentoByiDPageProps) {
                 <SelectBooleansItemsCompoenent
                   title="Aprovar?"
                   setValue={setValue}
-                  field={"aprovado"}
+                  field={"aprovadoCliente"}
                   trigger={trigger}
                   watch={watch}
                   listOptions={["Sim", "Nao"]}
-                  errors={!!errors.aprovado}
-                  errorsMsg={errors?.aprovado?.message}
+                  errors={!!errors.aprovadoCliente}
+                  errorsMsg={errors?.aprovadoCliente?.message}
                 />
                 <motion.div className="flex items-center justify-end">
                   <ButtonComponent
                     icon={<HiArrowRight size={20} />}
                     onClick={async () => {
-                      const isAprovadoValid = await trigger("aprovado");
+                      const isAprovadoValid = await trigger("aprovadoCliente");
                       if (isAprovadoValid && aprovadoWatch === true) {
                         setformMode("DOCUMENTO");
                         controlsDescritivo.start(opacityHidde);
@@ -545,16 +545,13 @@ export default function OrcamentoPage({ params }: OrcamentoByiDPageProps) {
               Obrigado {orcamentoByid?.nome} !
             </p>
             <p className="text-[16px] font-semibold text-center w-[430px]">
-              {IsSendEmailOrcamentoAprovadoClienteLoading
+              {isSendEmailOrcamentoAprovadoClienteSuccess
                 ? " Em breve nossa equipe entrara em contato."
-                : " Agrademos pelo feedback."}
+                : " Agradecemos pelo feedback."}
             </p>
           </motion.div>
         </motion.div>
       </div>
     </div>
   );
-}
-function setUploadedFiles(arg0: (prevFiles: File[]) => File[]) {
-  throw new Error("Function not implemented.");
 }

@@ -1,5 +1,5 @@
 import { api } from "../../../service/axios";
-import { CreateOrcAprovadoReqBody } from "@/types";
+import { CreateOrcAprovadoClienteReqBody } from "@/types";
 import { useMutation } from "@tanstack/react-query";
 
 export  function useSendEmailOrcamentoAprovadoCliente(){
@@ -11,7 +11,7 @@ export  function useSendEmailOrcamentoAprovadoCliente(){
             isSuccess: isSendEmailOrcamentoAprovadoClienteSuccess,
             mutate: sendEmailOrcAprovadoMutate
         } = useMutation({
-            mutationFn: async (bodyReq: CreateOrcAprovadoReqBody) => {
+            mutationFn: async (bodyReq: CreateOrcAprovadoClienteReqBody) => {
                 return   api
                 .post("/api/email/orcamentoAprovadoCliente", bodyReq)
                 .then((resp) => resp.data)

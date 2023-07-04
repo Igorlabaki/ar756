@@ -1,29 +1,26 @@
 import {DateEvent } from "@prisma/client";
-
 export interface IDateEventParams{
-  tipo: string;
-  data: string
-  titulo: string;
-  orcamentoId: string;
-  horarioInicio: string;
-  horarioFim:    string;
+  tipo: string  ;
+  titulo: string  ;
+  dataInicio: Date ;
+  dataFim:    Date  ;
+  orcamentoId: string  ;
 }
 
 export interface UpdateDateEventParams{
   dateId: string,
   data: {
-    tipo: string;
-    titulo: string;
-    dataFim: string;
-    dataInicio: string;
-    orcamentoId: string | null;
+    tipo?: string;
+    titulo?: string;
+    dataFim?: Date;
+    dataInicio?: Date;
+    orcamentoId?: string | null;
   }
 }
 
 export interface ValidateDateParam{
-  data: string
-  horarioInicio: string;
-  horarioFim:    string;
+  dataInicio: Date ;
+  dataFim:    Date;
 }
 
 export interface ValidateIfHasDateDateParam{

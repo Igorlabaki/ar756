@@ -5,10 +5,10 @@ import { IDateEventParams } from '@/backend/repository/IDateEventRepository';
 export  async function POST(req: NextRequest) {
   const res = await req.json()
 
-  const {data,orcamentoId,tipo,titulo,horarioFim,horarioInicio} : IDateEventParams = res
+  const {orcamentoId,tipo,titulo,dataFim,dataInicio} : IDateEventParams = res
 
   try {
-    const newImage = await createDateFactory().handle({data,orcamentoId,tipo,titulo,horarioFim,horarioInicio})
+    const newImage = await createDateFactory().handle({dataFim,orcamentoId,tipo,titulo,dataInicio})
 
     return NextResponse.json(newImage ); 
     

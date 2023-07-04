@@ -15,8 +15,18 @@ export const creatOrcamentoFormSchema = z.object({
     z.undefined(),
   ]),
   orcamentoId: z.string(),
-  aprovado: z.boolean({
+  aprovadoCliente: z.boolean({
     required_error: "Este campo e obrigatorio!"
   }),
-})
+}).refine((data) => {
+  if (data.aprovadoCliente && !data.documentos) {
+    return false
+  }
+  
+  return true;
+},{
+  message: "Este campo é obrigatório!",
+  path: ["documentos"]
+}
+)
   

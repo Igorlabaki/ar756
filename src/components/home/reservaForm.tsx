@@ -1,5 +1,4 @@
 import InputComponent from "../input";
-import { useForm } from "react-hook-form";
 import { ImageComponent } from "../image";
 import { BsCheckLg } from "react-icons/bs";
 import { ButtonComponent } from "../button";
@@ -7,49 +6,55 @@ import { BiMailSend } from "react-icons/bi";
 import { GrFormClose } from "react-icons/gr";
 import React, { useEffect, useState } from "react";
 import { motion, useAnimation } from "framer-motion";
-import { SelectItemsZodComponent } from "../selectItemsZod";
-import { zodResolver } from "@hookform/resolvers/zod";
-import useSendEmail from "@/hook/reactQuery/email/useSendEmailOrcamento";
 import { HiArrowLeft, HiArrowRight } from "react-icons/hi";
+import { SelectItemsZodComponent } from "../selectItemsZod";
+import { timesVisitAvailabel } from "@/constants/horarioLista";
 import useModalsContext from "@/hook/useContext/useModalsContext";
 import { CreateInfoFormData } from "@/zod/types/reservaFormZodType";
 import { SelectBooleansItemsCompoenent } from "../selectBooleansItems";
-import { createInfoFormSchema } from "@/zod/schemas/reservaFormZodSchema";
+import UseCreateReservaFormHooks from "@/formHooks/createReservaFormHooks";
+import {
+  opacityHidde,
+  opacityShow,
+  shakeAnimation,
+} from "@/constants/animations";
+import { WarningComponent } from "../warning";
 
-export default function ReservaFormComponent() {
-  const { isSendMailSuccess, sendMailMutate, IsSendMailLoading } =
-    useSendEmail();
+interface ReservaFormProps {
+  cliente?: boolean;
+}
+
+export default function ReservaFormComponent({ cliente }: ReservaFormProps) {
   const { handleCloseReservaModal } = useModalsContext();
-
   const [formMode, setformMode] = useState<"Pessoais" | "Evento" | "Success">(
     "Pessoais"
   );
-
-  const pessoaisForm = formMode.includes("Pessoais");
-  const eventoForm = formMode.includes("Evento");
-
   const {
     watch,
     reset,
+    errors,
     trigger,
-    setValue,
     register,
+    sendMail,
+    setValue,
+    nomeWatch,
+    emailWatch,
     handleSubmit,
-    formState: { errors },
-  } = useForm<CreateInfoFormData>({
-    resolver: zodResolver(createInfoFormSchema),
-  });
+    limpezaWatch,
+    telefoneWatch,
+    handleOnSubmit,
+    segurancaWatch,
+    convidadosWatch,
+    horarioFimWatch,
+    IsSendMailLoading,
+    isSendMailSuccess,
+    recepcionistaWatch,
+    handleEndHourChange,
+    handleStartHourChange,
+  } = UseCreateReservaFormHooks();
 
-  async function handleOnSubmit(data: CreateInfoFormData) {
-    sendMailMutate(data);
-  }
-
-  const nome = watch("nome");
-  const email = watch("email");
-  const limpeza = watch("limpeza");
-  const seguranca = watch("seguranca");
-  const convidados = watch("convidados");
-  const recepcionista = watch("recepcionista");
+  const eventoForm = formMode.includes("Evento");
+  const pessoaisForm = formMode.includes("Pessoais");
 
   const handleCheckBoxClick = (
     name: "seguranca" | "limpeza" | "recepcionista",
@@ -73,49 +78,12 @@ export default function ReservaFormComponent() {
     return value;
   };
 
-  useEffect(() => {
-    if (convidados >= 30) {
-      setValue("limpeza", true);
-      setValue("recepcionista", true);
-    }
-    if (convidados >= 70) {
-      setValue("limpeza", true);
-      setValue("seguranca", true);
-      setValue("recepcionista", true);
-    }
-
-    return () => {
-      if (convidados > 30) {
-        setValue("limpeza", true);
-        setValue("recepcionista", true);
-      }
-      if (convidados > 70) {
-        setValue("limpeza", true);
-        setValue("seguranca", true);
-        setValue("recepcionista", true);
-      }
-    };
-  }, [convidados, setValue]);
-
   const controlsPessoais = useAnimation();
   const controlsEventos = useAnimation();
   const controlsSuccess = useAnimation();
 
-  const shakeAnimation = {
-    x: [-10, 10, -10, 10, 0],
-    transition: { duration: 0.3 },
-  };
-
-  const opacityHidde = {
-    opacity: [1, 0],
-  };
-
-  const opacityShow = {
-    opacity: [0, 1],
-  };
-
   useEffect(() => {
-    if (isSendMailSuccess) {
+    if (isSendMailSuccess && cliente) {
       controlsEventos.start(opacityHidde);
       controlsSuccess.start(opacityShow);
       setformMode("Success");
@@ -135,7 +103,14 @@ export default function ReservaFormComponent() {
         >
           <GrFormClose />
         </div>
-        {!isSendMailSuccess && (
+        {isSendMailSuccess && (
+          <WarningComponent
+            text={"Orcamento criado com sucesso!"}
+            success
+            width="w-[800px] -top-[50px]"
+          />
+        )}
+        {cliente && (
           <ImageComponent
             alt={"logo"}
             h={"h-[110px]"}
@@ -275,29 +250,66 @@ export default function ReservaFormComponent() {
                 errors={!!errors.dataInicio}
                 errorsMsg={errors?.dataInicio?.message}
               />
-              <div className="flex items-center justify-center gap-x-5">
-                <InputComponent<CreateInfoFormData>
-                  entity="horarioInicio"
-                  title="Horario do Inicio"
-                  type="time"
-                  min="7:00"
-                  max="22:00"
-                  register={register}
-                  trigger={trigger}
-                  errors={!!errors.horarioInicio}
-                  errorsMsg={errors?.horarioInicio?.message}
-                />
-                <InputComponent<CreateInfoFormData>
-                  entity="horarioFim"
-                  title="Horario do Fim"
-                  type="time"
-                  min="7:00"
-                  max="22:00"
-                  register={register}
-                  trigger={trigger}
-                  errors={!!errors.horarioFim}
-                  errorsMsg={errors?.horarioFim?.message}
-                />
+              <div className="flex flex-col mb-2 gap-y-2">
+                <div className="flex items-center justify-start gap-x-3">
+                  <div className="w-[50%] flex flex-col gap-y-2 gap-x-3">
+                    <p className="font-semibold">Incio</p>
+                    <select
+                      onChange={(e) => handleStartHourChange(e)}
+                      className="w-full px-4 py-[23px] transition bg-white border-2 rounded-md outline-none"
+                    >
+                      <option>{"--:--"}</option>
+                      {timesVisitAvailabel.map(
+                        (item: string, index: number) => {
+                          const [hour, minutes] = item.split(":");
+                          if (parseInt(hour) < 8 || parseInt(hour) > 22) {
+                            return;
+                          }
+                          return (
+                            <option key={index} value={item}>
+                              {item}
+                            </option>
+                          );
+                        }
+                      )}
+                    </select>
+                    {errors?.horarioInicio && (
+                      <p className="text-red-700 text-[15px] w-full">
+                        {errors?.horarioInicio?.message}
+                      </p>
+                    )}
+                  </div>
+                  <div className="w-[50%] flex flex-col gap-y-2">
+                    <p className="font-semibold">Fim</p>
+                    <select
+                      onChange={(e) => handleEndHourChange(e)}
+                      disabled={parseInt(horarioFimWatch) >= 22 ? true : false}
+                      className="w-full px-4 py-[23px] transition bg-white border-2 rounded-md outline-none"
+                    >
+                      <option>
+                        {horarioFimWatch ? horarioFimWatch : "--:--"}
+                      </option>
+                      {timesVisitAvailabel.map(
+                        (item: string, index: number) => {
+                          const [hour] = item.split(":");
+                          if (parseInt(hour) < 8 || parseInt(hour) > 22) {
+                            return;
+                          }
+                          return (
+                            <option key={index} value={item}>
+                              {item}
+                            </option>
+                          );
+                        }
+                      )}
+                    </select>
+                    {errors?.horarioFim && (
+                      <p className="text-red-700 text-[15px] w-full">
+                        {errors?.horarioFim?.message}
+                      </p>
+                    )}
+                  </div>
+                </div>
               </div>
               <InputComponent<CreateInfoFormData>
                 title="Convidados"
@@ -315,12 +327,15 @@ export default function ReservaFormComponent() {
                   <div
                     className="w-4 h-4 border-[1px] border-gray-500 cursor-pointer brightness-75 flex justify-center items-center"
                     onClick={() => {
-                      if (convidados < 30) {
-                        handleCheckBoxClick("recepcionista", recepcionista);
+                      if (convidadosWatch < 30) {
+                        handleCheckBoxClick(
+                          "recepcionista",
+                          recepcionistaWatch
+                        );
                       }
                     }}
                   >
-                    {recepcionista && <BsCheckLg />}
+                    {recepcionistaWatch && <BsCheckLg />}
                   </div>
                   <p className="text-[15px] font-semibold">Recepcionista</p>
                 </div>
@@ -328,12 +343,12 @@ export default function ReservaFormComponent() {
                   <div
                     className="w-4 h-4 border-[1px] border-gray-500 cursor-pointer brightness-75 flex justify-center items-center"
                     onClick={() => {
-                      if (convidados < 30) {
-                        handleCheckBoxClick("limpeza", limpeza);
+                      if (convidadosWatch < 30) {
+                        handleCheckBoxClick("limpeza", limpezaWatch);
                       }
                     }}
                   >
-                    {limpeza && <BsCheckLg />}
+                    {limpezaWatch && <BsCheckLg />}
                   </div>
                   <p className="text-[15px] font-semibold">Limpeza</p>
                 </div>
@@ -341,12 +356,12 @@ export default function ReservaFormComponent() {
                   <div
                     className="w-4 h-4 border-[1px] border-gray-500 cursor-pointer brightness-75 flex justify-center items-center"
                     onClick={() => {
-                      if (convidados < 70) {
-                        handleCheckBoxClick("seguranca", seguranca);
+                      if (convidadosWatch < 70) {
+                        handleCheckBoxClick("seguranca", segurancaWatch);
                       }
                     }}
                   >
-                    {seguranca && <BsCheckLg />}
+                    {segurancaWatch && <BsCheckLg />}
                   </div>
                   <p className="text-[15px] font-semibold">Seguranca</p>
                 </div>
@@ -425,11 +440,11 @@ export default function ReservaFormComponent() {
               containerClassname={"z-20"}
             />
             <p className="text-[20px] font-semibold text-center w-[430px] ">
-              Obrigado {nome} !
+              Obrigado {nomeWatch} !
             </p>
             <p className="text-[16px] font-semibold text-center w-[430px]">
-              Encaminhamos para seu email {email} uma simulacao do orcamento do
-              seu evento.
+              Encaminhamos para seu email {emailWatch} uma simulacao do
+              orcamento do seu evento.
             </p>
           </motion.div>
         </motion.div>

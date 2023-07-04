@@ -13,7 +13,6 @@ export default function useCreateImage(){
             mutate: createImageMutate
         } = useMutation({
             mutationFn: async (bodyReq: IImageParams) => {
-                console.log(bodyReq)
                 return   api
                 .post("/api/image/create", bodyReq)
                 .then((resp) => resp.data)

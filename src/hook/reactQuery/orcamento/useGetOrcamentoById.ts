@@ -1,4 +1,4 @@
-import { Orcamento } from "@prisma/client";
+import { DateEvent, Orcamento } from "@prisma/client";
 import { api } from "../../../service/axios";
 import { useMutation } from "@tanstack/react-query";
 
