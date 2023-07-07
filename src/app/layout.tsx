@@ -29,10 +29,10 @@ export default function RootLayout({
             className={`relative ${raleway.className}  bg-tijolo flex flex-col scrollbar scrollbar-thumb-gray-900 scrollbar-track-gray-100 scrollbar-rounded-full`}
           >
             <div id="modal-root" />
-            <div className="absolute z-50 w-full">
+            <div className="absolute z-40 w-full">
               <HeaderComponent />
             </div>
-            <div className="flex-1">{children}</div>
+            <div className="flex-1 ">{children}</div>
             {!pathName.includes("dashboard") && <FooterComponent />}
           </body>
         </ModalsProvider>

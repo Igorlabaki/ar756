@@ -29,7 +29,7 @@ class SendEmailCase {
                         <table style="background-color: white; margin: auto; padding: 20px; width: 50%; height: 690px; border-radius: 10px;">
                             <tr>
                             <td style="text-align: center;">
-                                <img style="width: 300px; height: 290px; margin: 0 auto;" src="https://res.cloudinary.com/dcjkvwbvh/image/upload/v1684171091/czr5ef0g8qceitvhxkz0.png" alt="logo AR756" />
+                                <img style="width: 300px; height: 290px; margin: 0 auto;" src="https://res.cloudinary.com/dcjkvwbvh/image/upload/v1688637347/onbridge/uswu0yqtfeo2aq3vomkf.png" alt="logo AR756" />
                                 <h1 style="color: #333; width: 100%; text-align: center; margin-top: 10px;">Olá ${nome}, recebemos a sua mensagem!</h1>
                                 <p style="font-size: 18px; width: 60%; margin: 10px auto; text-align: center;">Agradecemos o seu interesse em conhecer a AR756. Simulamos um orçamento para seu evento, por gentileza clique no botão abaixo para ver a proposta.</p>
                                 <div style="width: 100%; text-align: center;margin-top: 40px;">

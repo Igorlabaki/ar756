@@ -204,7 +204,7 @@ export default function CalendarSectionComponent() {
             {dataByid && (
               <div className="text-[18px] w-full flex justify-center items-center mt-10 gap-x-4">
                 <p>Whatsapp:</p>
-                <p>{dataByid.orcamento.telefone}</p>
+                <p>{dataByid?.orcamento?.telefone}</p>
               </div>
             )}
             <div className="flex items-center justify-center w-full mt-10 gap-x-4">

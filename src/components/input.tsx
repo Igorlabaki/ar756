@@ -1,13 +1,12 @@
 import { capitalize } from "@/function/capitalize";
 import React, { InputHTMLAttributes } from "react";
 import {
-  set,
-  FieldValues,
   Path,
-  UseFormRegister,
-  UseFormTrigger,
-  UseFormSetValue,
   PathValue,
+  FieldValues,
+  UseFormTrigger,
+  UseFormRegister,
+  UseFormSetValue,
 } from "react-hook-form";
 
 interface InputProps<T extends FieldValues> extends InputHTMLAttributes<any> {
@@ -16,10 +15,10 @@ interface InputProps<T extends FieldValues> extends InputHTMLAttributes<any> {
   errors: boolean;
   classNameInput?: string;
   classNameLable?: string;
-  setValue?: UseFormSetValue<T>;
   trigger: UseFormTrigger<T>;
   register: UseFormRegister<T>;
   errorsMsg: string | undefined;
+  setValue?: UseFormSetValue<T>;
 }
 
 export default function InputComponent<T extends FieldValues>({

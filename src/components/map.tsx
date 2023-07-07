@@ -12,7 +12,7 @@ import { ImageComponent } from "./image";
 function MapComponent() {
   const customIcon = new Icon({
     iconUrl:
-      "https://res.cloudinary.com/dcjkvwbvh/image/upload/v1683551313/cetohj7c81owchu3ill2.svg",
+      "https://res.cloudinary.com/dcjkvwbvh/image/upload/v1688637822/onbridge/onkggypchr1yoffmtyop.png",
     iconSize: [100, 100],
     attribution: "sdsd",
   });

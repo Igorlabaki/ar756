@@ -110,7 +110,7 @@ export default function ReservaFormComponent({ cliente }: ReservaFormProps) {
             width="w-[800px] -top-[50px]"
           />
         )}
-        {cliente && (
+        {cliente && isSendMailSuccess && (
           <ImageComponent
             alt={"logo"}
             h={"h-[110px]"}
@@ -136,9 +136,9 @@ export default function ReservaFormComponent({ cliente }: ReservaFormProps) {
               x: 0,
             }}
             animate={controlsPessoais}
-            className="flex flex-col w-full min-w-full "
+            className="z-50 flex flex-col w-full min-w-full"
           >
-            <div className="flex flex-col flex-1 gap-y-6 ">
+            <div className="flex flex-col flex-1 gap-y-6">
               <InputComponent<CreateInfoFormData>
                 title="nome"
                 entity="nome"
