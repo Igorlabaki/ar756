@@ -17,7 +17,6 @@ const exu = Exo({ subsets: ["latin"] });
 export default function FooterComponent() {
   return (
     <footer className="flex flex-col items-center justify-center w-full bg-zinc-900 md:items-start">
-      <MapComponent />
       <div className="flex flex-col items-center justify-center w-full h-[138px]  text-white  md:flex-row md:justify-between overflow-hidden ">
         <div className="relative">
           <ImageComponent
