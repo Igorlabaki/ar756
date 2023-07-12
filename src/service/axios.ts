@@ -7,7 +7,7 @@ export const api = getAPIClient()
 export function getAPIClient(ctx?: any) {
 
     const api = axios.create({
-        baseURL: 'http://localhost:3000'
+        baseURL: 'https://ar756.vercel.app'
     })
 
   // api.interceptors.request.use(config => {
