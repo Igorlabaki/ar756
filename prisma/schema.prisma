@@ -11,9 +11,7 @@ datasource db {
 
   url = env("DATABASE_URL")
 
-  referentialIntegrity = "prisma"
-
-  shadowDatabaseUrl = env("SHADOW_DATA_BASE_URL")
+  relationMode = "prisma"
 }
 
 model Orcamento {
