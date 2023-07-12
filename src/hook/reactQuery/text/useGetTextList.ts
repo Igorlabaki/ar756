@@ -11,7 +11,7 @@ export default function useGetTextList() {
         queryFn: async () => {
         return api.get(`/api/text/list`, {
             headers: {
-            'Access-Control-Allow-Origin': 'https://ar756.vercel.app',
+            'Access-Control-Allow-Origin': 'https://ar756-qjy9maki1-igorlabaki.vercel.app/dashboard',
             },
         }).then((resp) => resp.data);
         },
